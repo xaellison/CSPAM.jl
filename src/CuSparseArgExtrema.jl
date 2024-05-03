@@ -1,5 +1,5 @@
 module CuSparseArgExtrema
 
-# Write your package code here.
-
+    include("int_encoding.jl")
+    export monotonic_reinterpret, retreive_arg
 end
