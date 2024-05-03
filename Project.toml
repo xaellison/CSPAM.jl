@@ -1,0 +1,13 @@
+name = "CuSparseArgExtrema"
+uuid = "3e8dadc1-726a-414e-ae04-50b5a35b8eff"
+authors = ["Alex Ellison"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1.6.7"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
