@@ -3,6 +3,10 @@ uuid = "3e8dadc1-726a-414e-ae04-50b5a35b8eff"
 authors = ["Alex Ellison"]
 version = "1.0.0-DEV"
 
+[deps]
+CUDA = "052768ef-5323-5732-b1bb-66c8b64840ba"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+
 [compat]
 julia = "1.6.7"
 

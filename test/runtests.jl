@@ -1,5 +1,7 @@
 using CuSparseArgExtrema
 using Test
+using CUDA
+
 
 @testset "CuSparseArgExtrema.jl" begin
     
@@ -74,5 +76,28 @@ using Test
         end
         @test test_comparison2()
 
+    end
+
+    @testset "reflection" begin
+        
+        struct A
+            a::Int
+            b::Tuple{Float32, Float32}
+        end
+        
+        generate_compound_shfl(A)
+
+        function k(c::AbstractArray{T}) where T
+            c[threadIdx().x] = CuSparseArgExtrema.compound_shfl(c[threadIdx().x])
+            return
+        end
+
+        a0 = A.(rand(Int, 32), tuple.(rand(Float32, 32), rand(Float32, 32)))
+        c0 = cu(a0)
+        c = copy(c0)
+        CUDA.@sync @cuda threads=32 k(c)
+        a = Array(c)
+        
+        @test all(a[1 + (i) % 32] == a0[1 + (i + 1) % 32] for i in 1:32)
     end
 end
